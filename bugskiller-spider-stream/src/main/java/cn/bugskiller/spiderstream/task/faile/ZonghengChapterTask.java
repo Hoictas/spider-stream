@@ -1,37 +1,37 @@
-package cn.bugskiller.spiderstream.task;
+package cn.bugskiller.spiderstream.task.faile;
 
 import cn.bugskiller.spiderstream.entity.Chapter;
-import cn.bugskiller.spiderstream.utils.PageUtils;
+import cn.bugskiller.spiderstream.task.ChapterTask;
+import cn.bugskiller.spiderstream.utils.NovelSiteUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 默认获取小说的所有章节
+ * 获取纵横网（https://book.zongheng.com）某部小说的所有章节
  *
  * @author Tiakon
  * 2018/4/19 18:16
  */
-public class JjwxcChapterTask extends ChapterTask {
+public class ZonghengChapterTask extends ChapterTask {
     @Override
     public List<Chapter> getChaptersByURL(String urlStr) throws IOException {
-        String result = PageUtils.crawlerPage(urlStr);
+        URL url = new URL(urlStr);
+        String host = url.getHost();
+        String result = NovelSiteUtils.crawlerPage(urlStr);
         Document document = Jsoup.parse(result);
         Elements elements = document.select("table a");
         List<Chapter> chapters = new ArrayList<>();
         for (Element element : elements) {
             Chapter chapter = new Chapter();
             chapter.setTitle(element.text());
-            if (!"".equals(element.attr("href"))) {
-                chapter.setUrl(element.attr("href"));
-            } else {
-                chapter.setUrl(element.attr("rel"));
-            }
+            chapter.setUrl(element.attr("href"));
             chapters.add(chapter);
         }
         return chapters;

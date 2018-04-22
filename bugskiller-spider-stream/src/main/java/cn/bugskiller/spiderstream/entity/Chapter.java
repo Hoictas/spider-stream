@@ -3,7 +3,7 @@ package cn.bugskiller.spiderstream.entity;
 import java.io.Serializable;
 
 /**
- * 章节
+ * 小说章节对应的JavaBean
  *
  * @author Tiakon
  * 2018/4/19 16:18

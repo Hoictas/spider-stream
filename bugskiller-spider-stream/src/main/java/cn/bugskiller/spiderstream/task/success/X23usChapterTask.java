@@ -1,7 +1,8 @@
-package cn.bugskiller.spiderstream.task;
+package cn.bugskiller.spiderstream.task.success;
 
 import cn.bugskiller.spiderstream.entity.Chapter;
-import cn.bugskiller.spiderstream.utils.PageUtils;
+import cn.bugskiller.spiderstream.task.ChapterTask;
+import cn.bugskiller.spiderstream.utils.NovelSiteUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,7 +21,7 @@ import java.util.List;
 public class X23usChapterTask extends ChapterTask {
     @Override
     public List<Chapter> getChaptersByURL(String urlStr) throws IOException {
-        String result = PageUtils.crawlerPage(urlStr);
+        String result = NovelSiteUtils.crawlerPage(urlStr);
         Document document = Jsoup.parse(result);
         Elements elements = document.select("#at a");
         List<Chapter> chapters = new ArrayList<>();

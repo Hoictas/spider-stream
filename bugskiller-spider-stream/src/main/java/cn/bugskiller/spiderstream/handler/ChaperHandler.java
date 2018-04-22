@@ -16,7 +16,6 @@ public interface ChaperHandler {
      * 根据小说的URl，得到小说的全部章节。
      * @param url 小说的URl
      * @return  List 小说的全部章节
-     * @throws  IOException  接收来自 PageUtils -> crawlerPage() 中的异常。
      */
     List<Chapter> getChaptersByURL(String url) throws IOException;
 }

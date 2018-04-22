@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 默认获取小说的所有章节
+ * 使用默认规则获取小说的所有章节
  *
  * @author Tiakon
  * 2018/4/19 18:16
@@ -17,3 +17,5 @@ public class DefultChapterTask extends ChapterTask {
         return super.getChaptersByURL(urlStr);
     }
 }
+
+
