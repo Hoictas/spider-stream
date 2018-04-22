@@ -1,9 +1,11 @@
 package cn.bugskiller.spiderstream.test;
 
 import cn.bugskiller.spiderstream.entity.Chapter;
+import cn.bugskiller.spiderstream.factory.NovelSiteFactory;
 import cn.bugskiller.spiderstream.handler.ChaperHandler;
-import cn.bugskiller.spiderstream.task.success.BiqugeChapterTask;
-import cn.bugskiller.spiderstream.utils.PageUtils;
+import cn.bugskiller.spiderstream.novels.NovelSiteEnum;
+import cn.bugskiller.spiderstream.task.DefultChapterTask;
+import cn.bugskiller.spiderstream.utils.NovelSiteUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -18,6 +20,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class TaskTest {
 
@@ -55,17 +59,17 @@ public class TaskTest {
     }
 
     @Test
-    public void testPageUtils() {
+    public void testNovelSiteUtils() {
         try {
-//            String page = PageUtils.crawlerPage("https://www.lbxs.com/dudu/54/54200/");
-//            String page = PageUtils.crawlerPage("https://www.x23us.com/html/57/57570/");
-            String page = PageUtils.crawlerPage("http://www.biquge.com.tw/18_18550/");
+//            String page = NovelSiteUtils.crawlerPage("https://www.lbxs.com/dudu/54/54200/");
+//            String page = NovelSiteUtils.crawlerPage("https://www.x23us.com/html/57/57570/");
+            String page = NovelSiteUtils.crawlerPage("http://www.biquge.com.tw/18_18550/");
             //起点
-//            String page = PageUtils.crawlerPage("https://book.qidian.com/info/1011687743");
+//            String page = NovelSiteUtils.crawlerPage("https://book.qidian.com/info/1011687743");
             //晋江文学城
-//            String page = PageUtils.crawlerPage("http://www.jjwxc.net/onebook.php?novelid=3459704");
+//            String page = NovelSiteUtils.crawlerPage("http://www.jjwxc.net/onebook.php?novelid=3459704");
 //            纵横纵横
-//            String page = PageUtils.crawlerPage("http://book.zongheng.com/showchapter/713091.html");
+//            String page = NovelSiteUtils.crawlerPage("http://book.zongheng.com/showchapter/713091.html");
             System.out.println(page);
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,11 +82,12 @@ public class TaskTest {
 //        ChaperHandler chapterTask = new X23usChapterTask();
 //        ChaperHandler chapterTask = new JjwxcChapterTask();
 //        ChaperHandler chapterTask = new ZonghengChapterTask();
-        ChaperHandler chapterTask = new BiqugeChapterTask();
+        ChaperHandler chapterTask = new DefultChapterTask();
         try {
 //            List<Chapter> chapters = chapterTask.getChaptersByURL("https://www.lbxs.com/dudu/54/54200");
+            List<Chapter> chapters = chapterTask.getChaptersByURL("https://www.bixia.org/185_185433/");
 //            List<Chapter> chapters = chapterTask.getChaptersByURL("https://www.x23us.com/html/57/57570/");
-            List<Chapter> chapters = chapterTask.getChaptersByURL("http://www.biquge.com.tw/18_18550/");
+//            List<Chapter> chapters = chapterTask.getChaptersByURL("http://www.biquge.com.tw/18_18550/");
 //            List<Chapter> chapters = chapterTask.getChaptersByURL("http://book.zongheng.com/showchapter/713091.html");
             for (Chapter chapter : chapters) {
                 System.out.println(chapter);
@@ -91,4 +96,26 @@ public class TaskTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testNovelSiteFactory() {
+
+        Map<NovelSiteEnum, Map<String, String>> novelSitesMap = NovelSiteFactory.NOVEL_SITES_CONTEXT;
+//        Set<Map.Entry<NovelSiteEnum, Map<String, String>>> entries = novelSitesMap.entrySet();
+
+//        for (Map.Entry<NovelSiteEnum, Map<String, String>> entry : entries) {
+//            System.out.println(entry.getKey());
+//            System.out.println(entry.getValue());
+//        }
+    }
+
+    @Test
+    public void testNovelSitesContext() {
+        Map<String, String> novelSitesContext = NovelSiteFactory.getNovelSitesContext(NovelSiteEnum.getNovelSiteByUrl("https://www.bixia.org/185_185433/"));
+        Set<Map.Entry<String, String>> entries = novelSitesContext.entrySet();
+        for (Map.Entry<String, String> entry : entries) {
+            System.out.println(entry.getKey()+" : "+entry.getValue());
+        }
+    }
+
 }
