@@ -1,7 +1,8 @@
-package cn.bugskiller.spiderstream.task;
+package cn.bugskiller.spiderstream.task.success;
 
 import cn.bugskiller.spiderstream.entity.Chapter;
-import cn.bugskiller.spiderstream.utils.PageUtils;
+import cn.bugskiller.spiderstream.task.ChapterTask;
+import cn.bugskiller.spiderstream.utils.NovelSiteUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,7 +25,7 @@ public class LbxsChapterTask extends ChapterTask {
     public List<Chapter> getChaptersByURL(String urlStr) throws IOException {
         URL url = new URL(urlStr);
         String host = url.getHost();
-        String result = PageUtils.crawlerPage(urlStr);
+        String result = NovelSiteUtils.crawlerPage(urlStr);
         Document document = Jsoup.parse(result);
         //        获取a标签
         Elements elements = document.select("#list a");
