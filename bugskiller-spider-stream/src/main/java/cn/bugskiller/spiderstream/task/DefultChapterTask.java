@@ -17,5 +17,3 @@ public class DefultChapterTask extends ChapterTask {
         return super.getChaptersByURL(urlStr);
     }
 }
-
-

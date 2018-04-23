@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class TaskTest {
+public class JUnitTest {
 
 
     @Test
@@ -114,7 +114,25 @@ public class TaskTest {
         Map<String, String> novelSitesContext = NovelSiteFactory.getNovelSitesContext(NovelSiteEnum.getNovelSiteByUrl("https://www.bixia.org/185_185433/"));
         Set<Map.Entry<String, String>> entries = novelSitesContext.entrySet();
         for (Map.Entry<String, String> entry : entries) {
-            System.out.println(entry.getKey()+" : "+entry.getValue());
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+    }
+
+    @Test
+    public void testCssQuery() {
+        try {
+            CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+//            String urlStr = "http://www.biquge.com.tw/18_18550/";
+            String urlStr = "https://www.x23us.com/html/57/57570/";
+            HttpGet get = new HttpGet(urlStr);
+            CloseableHttpResponse httpResponse = httpClient.execute(get);
+            String result = EntityUtils.toString(httpResponse.getEntity(), "gbk");
+            Document document = Jsoup.parse(result);
+            document.setBaseUri(urlStr);
+//            Elements elements = document.select("#list a");
+            Elements elements = document.select("table a");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
