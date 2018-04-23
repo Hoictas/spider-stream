@@ -65,11 +65,9 @@ public class JUnitTest {
         try {
             DefultChapterContentTask defultChapterContentTask = new DefultChapterContentTask();
 //            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.lbxs.com/dudu/98/98710/5654431.html");
-            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.x23us.com/html/57/57570/23598078.html");
-//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("http://www.biquge.com.tw/18_18820/8682755.html");
+//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.x23us.com/html/57/57570/23598078.html");
+            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("http://www.biquge.com.tw/18_18820/8682755.html");
 //            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.bixia.org/185_185433/9600937.html");
-//            TestChapterContentTask chapterContentTask = new TestChapterContentTask();
-//            ChapterContent chapterContent = chapterContentTask.getChapterContentByURL("https://www.x23us.com/html/70/70549/30872335.html");
             System.out.println(chapterContent);
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +116,7 @@ public class JUnitTest {
     @Test
     public void testNovelSiteFactory() {
 
-        Map<NovelSiteEnum, Map<String, String>> novelSitesMap = NovelSiteFactory.NOVEL_SITES_CONTEXT;
+//        Map<NovelSiteEnum, Map<String, String>> novelSitesMap = NovelSiteFactory.NOVEL_SITES_CONTEXT;
 //        Set<Map.Entry<NovelSiteEnum, Map<String, String>>> entries = novelSitesMap.entrySet();
 
 //        for (Map.Entry<NovelSiteEnum, Map<String, String>> entry : entries) {

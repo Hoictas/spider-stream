@@ -93,7 +93,7 @@ public class AbstractChapterContentTask extends AbstractCrawlerPage implements C
         }
 
         chapterContent.setTitle(titleElements.first().text());
-        chapterContent.setContent(contentElements.first().text());
+        chapterContent.setContent(contentElements.first().html());
         chapterContent.setChaptersURL(chatpersURLElement.attr("href"));
         chapterContent.setPrev(prevElement.attr("href"));
         chapterContent.setNext(nextElement.attr("href"));
