@@ -1,39 +1,37 @@
-package cn.bugskiller.spiderstream.task.success;
+package cn.bugskiller.spiderstream.task.nonsupport;
 
 import cn.bugskiller.spiderstream.entity.Chapter;
-import cn.bugskiller.spiderstream.task.ChapterTask;
-import cn.bugskiller.spiderstream.utils.NovelSiteUtils;
+import cn.bugskiller.spiderstream.task.AbstractChapterTask;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 获取笔趣阁网（http://www.biquge.com.tw/）某部小说的所有章节
+ * 获取晋江文学城网（http://www.jjwxc.net/）某部小说的所有章节
  *
  * @author Tiakon
  * 2018/4/19 18:16
  */
-public class BiqugeChapterTask extends ChapterTask {
+public class JjwxcChapterTask extends AbstractChapterTask {
     @Override
     public List<Chapter> getChaptersByURL(String urlStr) throws IOException {
-        URL url = new URL(urlStr);
-        String host = url.getHost();
-        String result = NovelSiteUtils.crawlerPage(urlStr);
+        String result = super.crawlerPage(urlStr);
         Document document = Jsoup.parse(result);
-        document.setBaseUri(urlStr);
-        Elements elements = document.select("#list a");
+        Elements elements = document.select("table a");
         List<Chapter> chapters = new ArrayList<>();
         for (Element element : elements) {
             Chapter chapter = new Chapter();
             chapter.setTitle(element.text());
-            //绝对路径
-            chapter.setUrl(element.attr("href"));
+            if (!"".equals(element.attr("href"))) {
+                chapter.setUrl(element.attr("href"));
+            } else {
+                chapter.setUrl(element.attr("rel"));
+            }
             chapters.add(chapter);
         }
         return chapters;

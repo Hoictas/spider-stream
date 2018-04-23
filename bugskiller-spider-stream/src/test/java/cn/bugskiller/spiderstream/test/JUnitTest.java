@@ -1,9 +1,11 @@
 package cn.bugskiller.spiderstream.test;
 
 import cn.bugskiller.spiderstream.entity.Chapter;
+import cn.bugskiller.spiderstream.entity.ChapterContent;
 import cn.bugskiller.spiderstream.factory.NovelSiteFactory;
-import cn.bugskiller.spiderstream.handler.ChaperHandler;
+import cn.bugskiller.spiderstream.handler.ChapterHandler;
 import cn.bugskiller.spiderstream.novels.NovelSiteEnum;
+import cn.bugskiller.spiderstream.task.DefultChapterContentTask;
 import cn.bugskiller.spiderstream.task.DefultChapterTask;
 import cn.bugskiller.spiderstream.utils.NovelSiteUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -23,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class TaskTest {
+public class JUnitTest {
 
 
     @Test
@@ -34,9 +36,9 @@ public class TaskTest {
             String urlStr = "https://www.x23us.com/html/57/57570/";
             HttpGet get = new HttpGet(urlStr);
             CloseableHttpResponse httpResponse = httpClient.execute(get);
-            String result = EntityUtils.toString(httpResponse.getEntity(), "gbk");
-//            System.out.println(result);
-            Document document = Jsoup.parse(result);
+            String resultPage = EntityUtils.toString(httpResponse.getEntity(), "gbk");
+//            System.out.println(resultPage);
+            Document document = Jsoup.parse(resultPage);
             //将HTML里标签里的a href 属性的相对地址替换成对应的绝对地址
             document.setBaseUri(urlStr);
 //            Elements elements = document.select("#list a");
@@ -56,6 +58,22 @@ public class TaskTest {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void testDefultChapterContentTask() {
+        try {
+            DefultChapterContentTask defultChapterContentTask = new DefultChapterContentTask();
+//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.lbxs.com/dudu/98/98710/5654431.html");
+            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.x23us.com/html/57/57570/23598078.html");
+//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("http://www.biquge.com.tw/18_18820/8682755.html");
+//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.bixia.org/185_185433/9600937.html");
+//            TestChapterContentTask chapterContentTask = new TestChapterContentTask();
+//            ChapterContent chapterContent = chapterContentTask.getChapterContentByURL("https://www.x23us.com/html/70/70549/30872335.html");
+            System.out.println(chapterContent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -82,7 +100,7 @@ public class TaskTest {
 //        ChaperHandler chapterTask = new X23usChapterTask();
 //        ChaperHandler chapterTask = new JjwxcChapterTask();
 //        ChaperHandler chapterTask = new ZonghengChapterTask();
-        ChaperHandler chapterTask = new DefultChapterTask();
+        ChapterHandler chapterTask = new DefultChapterTask();
         try {
 //            List<Chapter> chapters = chapterTask.getChaptersByURL("https://www.lbxs.com/dudu/54/54200");
             List<Chapter> chapters = chapterTask.getChaptersByURL("https://www.bixia.org/185_185433/");
@@ -114,8 +132,34 @@ public class TaskTest {
         Map<String, String> novelSitesContext = NovelSiteFactory.getNovelSitesContext(NovelSiteEnum.getNovelSiteByUrl("https://www.bixia.org/185_185433/"));
         Set<Map.Entry<String, String>> entries = novelSitesContext.entrySet();
         for (Map.Entry<String, String> entry : entries) {
-            System.out.println(entry.getKey()+" : "+entry.getValue());
+            System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
+
+    @Test
+    public void testCssQuery() {
+        try {
+            CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+//            String urlStr = "http://www.biquge.com.tw/18_18550/";
+            String urlStr = "https://www.x23us.com/html/57/57570/";
+            HttpGet get = new HttpGet(urlStr);
+            CloseableHttpResponse httpResponse = httpClient.execute(get);
+            String result = EntityUtils.toString(httpResponse.getEntity(), "gbk");
+            Document document = Jsoup.parse(result);
+            document.setBaseUri(urlStr);
+//            Elements elements = document.select("#list a");
+            Elements elements = document.select("table a");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testChapterContent() {
+        ChapterContent chapterContent = new ChapterContent();
+        chapterContent.setContent("无数道目光落在叶伏天的身上，看着那璀璨无比的命魂，金翅大鹏鸟。");
+        System.out.println(chapterContent);
+    }
+
 
 }
