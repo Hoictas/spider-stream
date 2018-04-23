@@ -1,7 +1,5 @@
 package cn.bugskiller.spiderstream.entity;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.Serializable;
 
 /**
@@ -65,7 +63,8 @@ public class ChapterContent implements Serializable {
     public String toString() {
         return "ChapterContent{" +
                 "title='" + title + '\'' +
-                ", content='" + StringUtils.abbreviate(content, 30) + '\'' +
+//                ", content='" + StringUtils.abbreviate(content, 30) + '\'' +
+                ", content='" + content + '\'' +
                 ", chaptersURL='" + chaptersURL + '\'' +
                 ", prev='" + prev + '\'' +
                 ", next='" + next + '\'' +

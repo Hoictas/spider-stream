@@ -17,7 +17,7 @@ import java.util.Map;
  * 2018/4/22 20:22
  */
 final public class NovelSiteFactory {
-    public static final Map<NovelSiteEnum, Map<String, String>> NOVEL_SITES_CONTEXT = new HashMap<>(64);
+    private static final Map<NovelSiteEnum, Map<String, String>> NOVEL_SITES_CONTEXT = new HashMap<>(64);
 
     static {
         initContext();
