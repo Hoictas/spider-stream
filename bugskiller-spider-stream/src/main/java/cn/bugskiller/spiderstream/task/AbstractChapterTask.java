@@ -1,10 +1,10 @@
 package cn.bugskiller.spiderstream.task;
 
+import cn.bugskiller.spiderstream.commons.AbstractCrawlerPage;
 import cn.bugskiller.spiderstream.entity.Chapter;
 import cn.bugskiller.spiderstream.factory.NovelSiteFactory;
-import cn.bugskiller.spiderstream.handler.ChaperHandler;
+import cn.bugskiller.spiderstream.handler.ChapterHandler;
 import cn.bugskiller.spiderstream.novels.NovelSiteEnum;
-import cn.bugskiller.spiderstream.utils.NovelSiteUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 具体解析网站小说的目录
+ * 解析网站小说的目录
  *
  * @author Tiakon
  * 2018/4/19 16:38
  */
-public class ChapterTask implements ChaperHandler {
+ public class AbstractChapterTask extends AbstractCrawlerPage implements ChapterHandler {
 
     /**
      * 根据小说的 url 解析小说章节
@@ -36,13 +36,13 @@ public class ChapterTask implements ChaperHandler {
         Map<String, String> novelSitesContext = NovelSiteFactory.getNovelSitesContext(NovelSiteEnum.getNovelSiteByUrl(urlStr));
 
         //  得到小说章节解析器
-        String cssQuery = novelSitesContext.get("selector");
+        String cssQuery = novelSitesContext.get("chatpers-selector");
 
         //  得到网页编码规则
         String charset = novelSitesContext.get("charset");
 
-        String result = NovelSiteUtils.crawlerPage(urlStr, charset);
-        Document document = Jsoup.parse(result);
+        String resultPage = super.crawlerPage(urlStr, charset);
+        Document document = Jsoup.parse(resultPage);
         document.setBaseUri(urlStr);
         Elements elements = document.select(cssQuery);
         List<Chapter> chapters = new ArrayList<>();

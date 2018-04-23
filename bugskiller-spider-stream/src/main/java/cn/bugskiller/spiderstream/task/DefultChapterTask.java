@@ -11,7 +11,7 @@ import java.util.List;
  * @author Tiakon
  * 2018/4/19 18:16
  */
-public class DefultChapterTask extends ChapterTask {
+public class DefultChapterTask extends AbstractChapterTask {
     @Override
     public List<Chapter> getChaptersByURL(String urlStr) throws IOException {
         return super.getChaptersByURL(urlStr);
