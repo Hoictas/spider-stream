@@ -1,7 +1,7 @@
 package cn.bugskiller.spiderstream.novels;
 
 /**
- * 已经被支持的小说网站枚举
+ * 添加已被支持的小说网站
  *
  * @author Tiakon
  * 2018/4/22 19:03
