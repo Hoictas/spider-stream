@@ -5,11 +5,11 @@
         <url>https://www.lbxs.com</url>
         <charset>utf-8</charset>
         <chatpers-selector>#list a</chatpers-selector>
-        <chatper-name-selector>.bookname h1,0</chatper-name-selector>
+        <chatper-name-selector>.bookname h1</chatper-name-selector>
         <chatper-content-selector>#content</chatper-content-selector>
-        <chatper-button-prev-selector>#.bookname .bottem1 a,1</chatper-button-prev-selector>
-        <chatper-button-chatpers-selector>#.bookname .bottem1 a,2</chatper-button-chatpers-selector>
-        <chatper-button-next-selector>#.bookname .bottem1 a,3</chatper-button-next-selector>
+        <chatper-button-prev-selector>.bookname .bottem1 a,1</chatper-button-prev-selector>
+        <chatper-button-chatpers-selector>.bookname .bottem1 a,2</chatper-button-chatpers-selector>
+        <chatper-button-next-selector>.bookname .bottem1 a,3</chatper-button-next-selector>
     </site>
 
     <site>
@@ -17,11 +17,11 @@
         <url>https://www.x23us.com</url>
         <charset>gbk</charset>
         <chatpers-selector>table a</chatpers-selector>
-        <chatper-name-selector>#amina h1,0</chatper-name-selector>
+        <chatper-name-selector>#a_main h1</chatper-name-selector>
         <chatper-content-selector>#contents</chatper-content-selector>
-        <chatper-button-prev-selector>#amin h3,0 a,0</chatper-button-prev-selector>
-        <chatper-button-chatpers-selector>#amin h3,0 a,1</chatper-button-chatpers-selector>
-        <chatper-button-next-selector>#amin h3,0 a,2</chatper-button-next-selector>
+        <chatper-button-prev-selector>#a_main h3 a,0</chatper-button-prev-selector>
+        <chatper-button-chatpers-selector>#a_main h3 a,1</chatper-button-chatpers-selector>
+        <chatper-button-next-selector>#a_main h3 a,2</chatper-button-next-selector>
     </site>
 
     <site>
@@ -41,7 +41,7 @@
         <url>https://www.bixia.org</url>
         <charset>utf-8</charset>
         <chatpers-selector>#list a</chatpers-selector>
-        <chatper-name-selector>.bookname h1,0</chatper-name-selector>
+        <chatper-name-selector>.bookname h1</chatper-name-selector>
         <chatper-content-selector>#content</chatper-content-selector>
         <chatper-button-prev-selector>#pager_prev</chatper-button-prev-selector>
         <chatper-button-chatpers-selector>#pager_current</chatper-button-chatpers-selector>

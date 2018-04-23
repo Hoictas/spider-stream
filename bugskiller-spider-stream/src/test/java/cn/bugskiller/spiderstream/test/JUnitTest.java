@@ -62,10 +62,15 @@ public class JUnitTest {
 
     @Test
     public void testDefultChapterContentTask() {
-        DefultChapterContentTask defultChapterContentTask = null;
         try {
-            defultChapterContentTask = new DefultChapterContentTask();
-            defultChapterContentTask.getChapterContentByURL("https://www.bixia.org/185_185433/9600937.html");
+            DefultChapterContentTask defultChapterContentTask = new DefultChapterContentTask();
+//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.lbxs.com/dudu/98/98710/5654431.html");
+            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.x23us.com/html/57/57570/23598078.html");
+//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("http://www.biquge.com.tw/18_18820/8682755.html");
+//            ChapterContent chapterContent = defultChapterContentTask.getChapterContentByURL("https://www.bixia.org/185_185433/9600937.html");
+//            TestChapterContentTask chapterContentTask = new TestChapterContentTask();
+//            ChapterContent chapterContent = chapterContentTask.getChapterContentByURL("https://www.x23us.com/html/70/70549/30872335.html");
+            System.out.println(chapterContent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -155,5 +160,6 @@ public class JUnitTest {
         chapterContent.setContent("无数道目光落在叶伏天的身上，看着那璀璨无比的命魂，金翅大鹏鸟。");
         System.out.println(chapterContent);
     }
+
 
 }

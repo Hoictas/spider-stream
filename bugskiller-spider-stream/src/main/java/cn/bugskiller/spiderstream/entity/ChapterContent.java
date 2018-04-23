@@ -14,7 +14,7 @@ public class ChapterContent implements Serializable {
 
     private String title;
     private String content;
-    private String chapterListURl;
+    private String chaptersURL;
     private String prev;
     private String next;
 
@@ -37,12 +37,12 @@ public class ChapterContent implements Serializable {
         this.content = content;
     }
 
-    public String getChapterListURl() {
-        return chapterListURl;
+    public String getChaptersURL() {
+        return chaptersURL;
     }
 
-    public void setChapterListURl(String chapterListURl) {
-        this.chapterListURl = chapterListURl;
+    public void setChaptersURL(String chaptersURL) {
+        this.chaptersURL = chaptersURL;
     }
 
     public String getPrev() {
@@ -66,7 +66,7 @@ public class ChapterContent implements Serializable {
         return "ChapterContent{" +
                 "title='" + title + '\'' +
                 ", content='" + StringUtils.abbreviate(content, 30) + '\'' +
-                ", chapterListURl='" + chapterListURl + '\'' +
+                ", chaptersURL='" + chaptersURL + '\'' +
                 ", prev='" + prev + '\'' +
                 ", next='" + next + '\'' +
                 '}';

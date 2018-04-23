@@ -48,24 +48,53 @@ public class AbstractChapterContentTask extends AbstractCrawlerPage implements C
         document.setBaseUri(urlStr);
 
         Elements titleElements = document.select(chatperNameSelector);
-        Elements contentElements = document.select(chatperContentSelector);
-        Elements prevElements = document.select(chatperButtonPrevSelector);
-        Elements listURLElements = document.select(chatperButtonChatpersSelector);
-        Elements nextElements = document.select(chatperButtonNextSelector);
 
-        Element listURLElement = listURLElements.get(0);
-        listURLElement = listURLElement.attr("href", listURLElement.absUrl("href"));
+        Elements contentElements = document.select(chatperContentSelector);
+
         ChapterContent chapterContent = new ChapterContent();
 
-        Element prevElement = prevElements.get(0);
-        prevElement = prevElement.attr("href", prevElement.absUrl("href"));
+        Element prevElement;
+        Element chatpersURLElement;
+        Element nextElement;
+        /**
+         *TODO By Tiakon
+         *  根据css选择器的不同来解析
+         **/
+        if (!chatperButtonPrevSelector.contains(",")) {
 
-        Element nextElement = nextElements.get(0);
-        nextElement = nextElement.attr("href", nextElement.absUrl("href"));
+            Elements prevElements = document.select(chatperButtonPrevSelector);
+            Elements chatpersURLElements = document.select(chatperButtonChatpersSelector);
+            Elements nextElements = document.select(chatperButtonNextSelector);
 
-        chapterContent.setTitle(titleElements.text());
-        chapterContent.setContent(contentElements.text());
-        chapterContent.setChapterListURl(listURLElement.attr("href"));
+            chatpersURLElement = chatpersURLElements.get(0);
+            chatpersURLElement = chatpersURLElement.attr("href", chatpersURLElement.absUrl("href"));
+
+            prevElement = prevElements.get(0);
+            prevElement = prevElement.attr("href", prevElement.absUrl("href"));
+
+            nextElement = nextElements.get(0);
+            nextElement = nextElement.attr("href", nextElement.absUrl("href"));
+
+        } else {
+            String[] chatperButtons = chatperButtonPrevSelector.split("[,]");
+            Elements elements = document.select(chatperButtons[0]);
+            int indexsPrev = Integer.parseInt(chatperButtons[1]);
+            int indexsChatpers = Integer.parseInt(chatperButtonChatpersSelector.split("[,]")[1]);
+            int indexsNext = Integer.parseInt(chatperButtonNextSelector.split("[,]")[1]);
+
+            prevElement = elements.get(indexsPrev);
+            prevElement = prevElement.attr("href", prevElement.absUrl("href"));
+
+            chatpersURLElement = elements.get(indexsChatpers);
+            chatpersURLElement = chatpersURLElement.attr("href", chatpersURLElement.absUrl("href"));
+
+            nextElement = elements.get(indexsNext);
+            nextElement = nextElement.attr("href", nextElement.absUrl("href"));
+        }
+
+        chapterContent.setTitle(titleElements.first().text());
+        chapterContent.setContent(contentElements.first().text());
+        chapterContent.setChaptersURL(chatpersURLElement.attr("href"));
         chapterContent.setPrev(prevElement.attr("href"));
         chapterContent.setNext(nextElement.attr("href"));
 
