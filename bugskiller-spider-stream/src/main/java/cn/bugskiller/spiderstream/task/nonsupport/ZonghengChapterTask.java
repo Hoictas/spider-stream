@@ -22,7 +22,6 @@ public class ZonghengChapterTask extends AbstractChapterTask {
     @Override
     public List<Chapter> getChaptersByURL(String urlStr) throws IOException {
         URL url = new URL(urlStr);
-        String host = url.getHost();
         String result = super.crawlerPage(urlStr);
         Document document = Jsoup.parse(result);
         Elements elements = document.select("table a");

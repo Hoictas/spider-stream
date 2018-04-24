@@ -8,6 +8,9 @@ package cn.bugskiller.spiderstream.novels;
  */
 public enum NovelSiteEnum {
 
+    /**
+     *网站编号和网址
+     * */
     LaBi(1, "https://www.lbxs.com"),
     DingDian(2, "https://www.x23us.com"),
     BiQqGe(3, "http://www.biquge.com.tw"),
@@ -25,17 +28,10 @@ public enum NovelSiteEnum {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public static NovelSiteEnum getNovelSiteById(int id) {
         switch (id) {

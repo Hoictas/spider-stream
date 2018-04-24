@@ -18,6 +18,8 @@ import java.util.Map;
  * 2018/4/23 13:02
  */
 public class AbstractChapterContentTask extends AbstractCrawlerPage implements ChapterContentHandler {
+    private static final String BUTTON_SELECTOR_SEPARATOR = ",";
+
     @Override
     public ChapterContent getChapterContentByURL(String urlStr) throws IOException {
 
@@ -56,11 +58,13 @@ public class AbstractChapterContentTask extends AbstractCrawlerPage implements C
         Element prevElement;
         Element chatpersURLElement;
         Element nextElement;
+
+
         /**
          *TODO By Tiakon
          *  根据css选择器的不同来解析
          **/
-        if (!chatperButtonPrevSelector.contains(",")) {
+        if (!chatperButtonPrevSelector.contains(BUTTON_SELECTOR_SEPARATOR)) {
 
             Elements prevElements = document.select(chatperButtonPrevSelector);
             Elements chatpersURLElements = document.select(chatperButtonChatpersSelector);
